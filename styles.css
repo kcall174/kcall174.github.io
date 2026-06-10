@@ -105,6 +105,17 @@ a:hover {
   color: var(--text);
 }
 
+.nav-actions {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.nav-actions .btn {
+  text-decoration: none;
+  white-space: nowrap;
+}
+
 .btn {
   border: 0;
   border-radius: 999px;
@@ -149,7 +160,7 @@ main {
 }
 
 .hero h1 {
-  margin: 0 0 0.75rem;
+  margin: 0 0 0.35rem;
   font-family: var(--serif);
   font-size: clamp(2.6rem, 6vw, 4rem);
   font-weight: 400;
@@ -157,9 +168,16 @@ main {
   letter-spacing: -0.02em;
 }
 
+.hero-role {
+  margin: 0 0 1rem;
+  font-size: 1.15rem;
+  font-weight: 500;
+  color: var(--text);
+}
+
 .hero-tagline {
   margin: 0 0 1.5rem;
-  max-width: 38ch;
+  max-width: 52ch;
   color: var(--text-muted);
   font-size: 1.08rem;
 }
@@ -187,7 +205,8 @@ main {
   color: var(--text-muted);
 }
 
-.objective-card {
+.impact-card,
+.prose-card {
   background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: var(--radius);
@@ -195,15 +214,37 @@ main {
   box-shadow: var(--shadow);
 }
 
-.objective-card h2 {
-  margin: 0 0 0.75rem;
+.impact-card h2 {
+  margin: 0 0 1rem;
   font-size: 1rem;
   font-weight: 600;
 }
 
-.objective-card p {
+.impact-list {
   margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.85rem;
+}
+
+.impact-list li {
   color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+.impact-list strong {
+  color: var(--accent);
+  font-size: 1.05rem;
+}
+
+.prose-card p {
+  margin: 0 0 1rem;
+  color: var(--text-muted);
+}
+
+.prose-card p:last-child {
+  margin-bottom: 0;
 }
 
 .section {
@@ -230,10 +271,96 @@ main {
   color: var(--text-muted);
 }
 
-.qual-grid {
+.qual-grid,
+.skills-grid,
+.projects-grid,
+.value-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1.25rem;
+}
+
+.projects-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.role-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+}
+
+.role-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-bottom: 1.25rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.role-header h3 {
+  margin: 0 0 0.25rem;
+  font-size: 1.2rem;
+}
+
+.role-company {
+  margin: 0;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.role-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.25rem;
+  text-align: right;
+}
+
+.role-meta time {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.role-meta span {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+}
+
+.role-bullets {
+  margin: 0;
+  padding-left: 1.2rem;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.role-bullets li {
+  color: var(--text-muted);
+}
+
+.role-bullets li::marker {
+  color: var(--accent);
+}
+
+.value-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.25rem 1.35rem;
+}
+
+.value-card h3 {
+  margin: 0 0 0.5rem;
+  font-size: 1rem;
+}
+
+.value-card p {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.95rem;
 }
 
 .card {
@@ -365,6 +492,12 @@ main {
   font-size: 1.2rem;
 }
 
+.edu-years {
+  margin: 0;
+  color: var(--accent);
+  font-weight: 600;
+}
+
 .edu-school {
   margin: 0 0 0.25rem;
   color: var(--accent);
@@ -414,9 +547,17 @@ main {
   margin: 0;
 }
 
+@media (max-width: 960px) {
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media (max-width: 860px) {
   .hero,
   .qual-grid,
+  .skills-grid,
+  .value-grid,
   .edu-card,
   .timeline-item {
     grid-template-columns: 1fr;
@@ -430,6 +571,19 @@ main {
     order: 3;
     width: 100%;
     flex-wrap: wrap;
+  }
+
+  .nav-actions {
+    margin-left: auto;
+  }
+
+  .role-header {
+    flex-direction: column;
+  }
+
+  .role-meta {
+    align-items: flex-start;
+    text-align: left;
   }
 
   .involvement-list li {
@@ -458,15 +612,21 @@ main {
 
   .hero,
   .qual-grid,
+  .skills-grid,
+  .value-grid,
   .edu-card,
-  .timeline-item {
+  .timeline-item,
+  .role-card {
     break-inside: avoid;
   }
 
   .card,
   .timeline-item,
   .edu-card,
-  .objective-card,
+  .impact-card,
+  .prose-card,
+  .role-card,
+  .value-card,
   .involvement-list li {
     background: #fff;
     border-color: #ddd;
